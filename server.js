@@ -3,6 +3,7 @@ const app = express();
 const PostModel = require('./models/post')
 const Post = require('./controllers/post');
 const bodyParser = require('body-parser');
+const JSON = require('circular-json')
 const expressValidator = require('express-validator');
 require('./data/reddit-db')
 var exphbs = require('express-handlebars');
