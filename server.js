@@ -4,7 +4,7 @@ var exphbs = require('express-handlebars');
 const Post = require('./controllers/post')
 
 app.get('/', (req, res) => {
-    res.render('./layouts/main', {})
+    res.render('./main-index', {})
 });
 
 Post(app);
