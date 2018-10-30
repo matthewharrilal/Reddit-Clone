@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const PostModel = require('./models/post')
 const Post = require('./controllers/post');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
+    // const posts = PostModel.find()
     res.render('./main-index', {})
 });
 
