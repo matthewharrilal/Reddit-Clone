@@ -1,3 +1,5 @@
+const Post = require('../models/post')
+
 module.exports = function(app) {
     app.get("/posts", (req, res) => {
         res.send('Viewing all available posts')
@@ -9,6 +11,10 @@ module.exports = function(app) {
     });
 
     app.post("/posts", (req, res) => {
-        console.log(req.body)
+        const post = new Post(req.body);
+
+        post.save((err, post) => {
+            return res.redirect('/')
+        });
     });
 };
