@@ -5,6 +5,6 @@ module.exports = function(app) {
 
     app.get("/posts/new", (req, res) => {
         console.log('Rendering forms')
-        res.render("./layouts/post-new", {})
+        res.render("./post-new", {})
     });
 };
