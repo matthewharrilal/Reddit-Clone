@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
 const Post = require('./controllers/post');
-const bodyParser = require('parser');
+const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 var exphbs = require('express-handlebars');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
     res.render('./main-index', {})
