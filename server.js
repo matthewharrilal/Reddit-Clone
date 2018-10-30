@@ -1,7 +1,8 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const Post = require('./controllers/post');
+const bodyParser = require('parser');
 var exphbs = require('express-handlebars');
-const Post = require('./controllers/post')
 
 app.get('/', (req, res) => {
     res.render('./main-index', {})

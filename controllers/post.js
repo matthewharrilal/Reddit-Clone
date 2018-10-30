@@ -7,4 +7,8 @@ module.exports = function(app) {
         console.log('Rendering forms')
         res.render("./post-new", {})
     });
+
+    app.post("/posts", (req, res) => {
+        console.log(req.body)
+    });
 };
