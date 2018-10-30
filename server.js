@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
-    // const posts = PostModel.find()
     res.render('./main-index', {})
 });
 
