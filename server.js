@@ -3,6 +3,7 @@ const app = express();
 const Post = require('./controllers/post');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+require('./data/reddit-db')
 var exphbs = require('express-handlebars');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
