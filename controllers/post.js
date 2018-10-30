@@ -16,7 +16,7 @@ module.exports = function(app) {
 
     app.get('/posts/:id', (req, res) => {
         Post.findById(req.params.id).then((post) => {
-            res.render('post-show', {
+            res.render('../views/post-show', {
                 post
             })
         }).catch((err) => {
