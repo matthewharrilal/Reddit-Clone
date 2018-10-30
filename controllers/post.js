@@ -13,4 +13,14 @@ module.exports = function(app) {
             return res.redirect('/')
         });
     });
+
+    app.get('/posts/:id', (req, res) => {
+        Post.findById(req.params.id).then((post) => {
+            res.render('post-show', {
+                post
+            })
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    });
 };
