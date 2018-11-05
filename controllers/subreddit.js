@@ -5,7 +5,10 @@ module.exports = function(app) {
     app.get('/n/:subreddit', function(req, res) {
         Post.find({subreddit: req.params.subreddit})
         .then((posts) => {
-            console.log('These are the posts ' + posts)
-        });
+            res.render("posts-index.handlebars", {posts})
+        })
+        .catch((err) => {
+            console.log(err.data)
+        })
     });
 }
