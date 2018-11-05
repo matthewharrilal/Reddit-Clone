@@ -15,6 +15,7 @@ const Post = require('./controllers/post');
 const bodyParser = require('body-parser');
 const JSON = require('circular-json')
 const expressValidator = require('express-validator');
+const Subreddit = require('./controllers/subreddit')
 
 var exphbs = require('express-handlebars');
 
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 });
 
 Post(app);
+Subreddit(app)
 
 // Main.handlebars all other templates inherit from
 app.engine('handlebars', exphbs({

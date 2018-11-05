@@ -1,3 +1,5 @@
 The question is what do we have to do for the Reddit Clone right now?
 
 Use Linter for all html in templates!
+
+Get up to the sign up and login by tonight
