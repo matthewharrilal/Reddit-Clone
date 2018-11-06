@@ -5,3 +5,7 @@ Use Linter for all html in templates!
 Modularize routes using the express router
 
 Get up to the sign up and login by tonight
+
+More development advice on the top down approach?
+
+Why save the post again when were just adding a comment? Is it to maintain the ordered collection ?

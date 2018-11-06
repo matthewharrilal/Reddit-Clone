@@ -27,14 +27,15 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
-    PostModel.find({}).then((posts) => {
-        console.log('These are the posts ' + posts)
-        res.render('./posts-index.handlebars', {
-            posts
+    PostModel.find({}, function(err, posts) {
+            console.log('These are the posts ' + posts)
+            res.render('./posts-index.handlebars', {
+                posts
+            })
         })
-    }).catch((err) => {
-        console.log(err.message)
-    })
+        .catch((err) => {
+            console.log(err.message)
+        })
 });
 
 Post(app);
