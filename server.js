@@ -28,7 +28,7 @@ app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
     PostModel.find({}, function(err, posts) {
-            console.log('These are the posts ' + posts)
+            console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
                 posts
             })
