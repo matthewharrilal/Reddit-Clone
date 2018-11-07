@@ -2,7 +2,7 @@ require('./data/reddit-db')
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 mongoose.connect(
-    "mongodb://localhost/redditclone", {
+    "mongodb://localhost/reddit-db", {
         useMongoClient: true
     }
 );

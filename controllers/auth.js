@@ -7,6 +7,7 @@ module.exports = (app) => {
     });
 
     app.post('/signup', (req, res) => {
+        console.log('Sign Up route requested')
         const user = new User(req.body)
         user
         .save()
