@@ -30,6 +30,10 @@ module.exports = (app) => {
             })
     });
 
+    app.get('/login', (req, res) => {
+        res.render('login.handlebars')
+    });
+
     app.get('/logout', (req, res) => {
         res.clearCookie('nToken');
         res.redirect('/');
