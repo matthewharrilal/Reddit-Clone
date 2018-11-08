@@ -1,5 +1,7 @@
 require('./data/reddit-db')
 require('dotenv').config();
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -23,12 +25,14 @@ const Auth = require('./controllers/auth')
 var exphbs = require('express-handlebars');
 
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
+    console.log('Cookies on the request ' + req.cookies)
     PostModel.find({}, function(err, posts) {
             console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
