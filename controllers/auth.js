@@ -29,4 +29,9 @@ module.exports = (app) => {
                 console.log('ERROR ' + err)
             })
     });
+
+    app.get('/logout', (req, res) => {
+        res.clearCookie('nToken');
+        res.redirect('/');
+      });
 }
