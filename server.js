@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({
 app.use(expressValidator()); // Add after body parser initialization!
 
 app.get('/', (req, res) => {
-    console.log('Cookies on the request ' + req.cookies)
+    console.log('Cookies on the request ' + JSON.stringify(req.cookies))
     PostModel.find({}, function(err, posts) {
             console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
