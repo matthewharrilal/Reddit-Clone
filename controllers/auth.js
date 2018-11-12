@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken');
+const alert = require('alert-node')
 
 
 module.exports = (app) => {
@@ -10,24 +11,30 @@ module.exports = (app) => {
 
     app.post('/signup', (req, res) => {
         console.log('Sign Up route requested')
-        const user = new User(req.body)
-        user
-            .save()
-            .then((user) => {
-                var token = jwt.sign({
-                    _id: user._id
-                }, process.env.SECRET, {
-                    expiresIn: "60 days"
-                });
-                res.cookie('nToken', token, {
-                    maxAge: 900000,
-                    httpOnly: true
-                });
-                res.redirect('/')
-            })
-            .catch((err) => {
-                console.log('ERROR ' + err)
-            })
+        if (req.body.password == req.body.passwordConfirmation) {
+            const user = new User(req.body)
+            user
+                .save()
+                .then((user) => {
+                    var token = jwt.sign({
+                        _id: user._id
+                    }, process.env.SECRET, {
+                        expiresIn: "60 days"
+                    });
+                    res.cookie('nToken', token, {
+                        maxAge: 900000,
+                        httpOnly: true
+                    });
+                    res.redirect('/')
+                })
+                .catch((err) => {
+                    console.log('ERROR ' + err)
+                })
+        }
+
+        else {
+            alert("Please make sure both passwords match!");
+        }
     });
 
     app.get('/login', (req, res) => {
