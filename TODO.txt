@@ -1,11 +1,10 @@
 The question is what do we have to do for the Reddit Clone right now?
 
-Use Linter for all html in templates!
 
 Modularize routes using the express router
 
-Get up to the sign up and login by tonight
+What would it look like for a forget password process and a Remember me functionality ?
 
-More development advice on the top down approach?
+Well, to answer that the forget password process would be sending an update request to the database updating the hash with the hash of a new process
 
-Why save the post again when were just adding a comment? Is it to maintain the ordered collection ?
+The step by step process that we are going to have to take is that we are going to have create a forget password template?
