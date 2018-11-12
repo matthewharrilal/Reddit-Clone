@@ -1,6 +1,18 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken');
 const alert = require('alert-node')
+const bcrypt = require('bcryptjs')
+
+function getHash(username, password) {
+    User.findOne({
+        username: username
+    })
+    bcrypt.genSalt(10, (err, salt) => { // Ten rounds of salting
+        bcrypt.hash(password, salt, (err, hash) => { // Hash user password with salt
+            return hash
+        })
+    })
+}
 
 
 module.exports = (app) => {
@@ -30,9 +42,7 @@ module.exports = (app) => {
                 .catch((err) => {
                     console.log('ERROR ' + err)
                 })
-        }
-
-        else {
+        } else {
             alert("Please make sure both passwords match!");
         }
     });
@@ -90,5 +100,25 @@ module.exports = (app) => {
 
     app.get('/forgetPassword', (req, res) => {
         res.render('./forget-password.handlebars')
+    });
+
+    app.put("/forgetPassword", (req, res) => {
+        const hash = getHash(req.body.email, req.body.updatedPassword) {
+            return new Promise(function () {
+
+            })
+        }
+
+        User.findOneAndUpdate({
+            username: req.body.email
+        }, {
+            $set: {
+                password: hash
+            }
+        }, (err, user) => {
+            console.log("Updated Password " + user.password)
+            res.redirect('/')
+        })
+
     });
 }
