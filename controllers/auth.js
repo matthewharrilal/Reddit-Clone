@@ -88,4 +88,7 @@ module.exports = (app) => {
         res.redirect('/');
     });
 
+    app.get('/forgetPassword', (req, res) => {
+        res.render('./forget-password.handlebars')
+    });
 }
