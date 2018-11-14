@@ -46,6 +46,23 @@ app.get('/', (req, res) => {
         })
 });
 
+var checkAuth = (req, res, next) => {
+    console.log("Checking authentication");
+    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+      console.log('User is null')
+      req.user = null;
+    } else {
+      var token = req.cookies.nToken;
+      console.log('This is the token present on the request ' + token)
+      var decodedToken = jwt.decode(token, { complete: true }) || {};
+      console.log('This is the decoded JWT token user ' + decodedToken.payload)
+      req.user = decodedToken.payload;
+    }
+  
+    next();
+  };
+  app.use(checkAuth);
+
 Post(app);
 Subreddit(app);
 Comment(app);
