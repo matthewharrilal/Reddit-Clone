@@ -55,14 +55,12 @@ var checkAuth = (req, res, next) => {
 app.use(checkAuth);
 
 app.get('/', (req, res) => {
-    const currentUser = req.user
     console.log('This is the current user ' + JSON.stringify(app.locals.user))
     console.log('Cookies on the request ' + JSON.stringify(req.cookies))
     PostModel.find({}, function (err, posts) {
             console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
-                posts,
-                currentUser
+                posts
             })
         })
         .catch((err) => {

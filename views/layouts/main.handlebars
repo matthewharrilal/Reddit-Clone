@@ -24,7 +24,7 @@
   <nav class="navbar navbar-light bg-light">
     <span class="navbar-brand mb-0 h1">Navbar</span>
     <ul class="nav navbar-nav navbar-left">
-      {{#if currentUser}}
+      {{#if user}}
       <li><a href="/logout">Logout</a></li>
       <a href="/posts/new" class="btn btn-primary navbar-btn">New Post</a>
       {{else}}
