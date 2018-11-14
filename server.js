@@ -32,13 +32,35 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(expressValidator()); // Add after body parser initialization!
+var checkAuth = (req, res, next) => {
+    console.log("Checking authentication");
+    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+        console.log('User is null')
+        req.user = null;
+    } else {
+        var token = req.cookies.nToken;
+        console.log('This is the token present on the request ' + token)
+        var decodedToken = jwt.decode(token, {
+            complete: true
+        }) || {};
+        console.log('This is the decoded JWT token user ' + decodedToken.payload)
+        req.user = decodedToken.payload;
+    }
+
+    next();
+};
+app.use(checkAuth);
+
 
 app.get('/', (req, res) => {
+    const currentUser = req.user
+    console.log('This is the current user ' + req.user)
     console.log('Cookies on the request ' + JSON.stringify(req.cookies))
     PostModel.find({}, function (err, posts) {
             console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
-                posts
+                posts,
+                currentUser
             })
         })
         .catch((err) => {
@@ -46,22 +68,6 @@ app.get('/', (req, res) => {
         })
 });
 
-var checkAuth = (req, res, next) => {
-    console.log("Checking authentication");
-    if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
-      console.log('User is null')
-      req.user = null;
-    } else {
-      var token = req.cookies.nToken;
-      console.log('This is the token present on the request ' + token)
-      var decodedToken = jwt.decode(token, { complete: true }) || {};
-      console.log('This is the decoded JWT token user ' + decodedToken.payload)
-      req.user = decodedToken.payload;
-    }
-  
-    next();
-  };
-  app.use(checkAuth);
 
 Post(app);
 Subreddit(app);
