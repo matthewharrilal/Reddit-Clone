@@ -5,8 +5,7 @@ Modularize routes using the express router
 
 What would it look like for a forget password process and a Remember me functionality ?
 
-Well, to answer that the forget password process would be sending an update request to the database updating the hash with the hash of a new process
+Now, that we have the forgot password functionality implemented we have to figure out the 
+remember me functionality
 
-The step by step process that we are going to have to take is that we are going to have create a forget password template?,
-Now that we have the template routing to the correct template how do we actually get the forget password functionality working we are going to send a patch requesrt
-and we are going to get the hashed version of the new password and update their password with the new hashed version
+To do that we have to make sure that 
