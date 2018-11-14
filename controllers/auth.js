@@ -104,7 +104,16 @@ module.exports = (app) => {
     app.put("/forgetPassword", (req, res) => {
         getHash(req.body.updatedPassword)
             .then((hash) => {
-                
+                User.update({
+                    username: req.body.email
+                }, {
+                    $set: {
+                        "password": hash
+                    }
+                }, function (err, user) {
+                    if (err) throw error
+                    res.redirect('/')
+                })
             })
     });
 }
