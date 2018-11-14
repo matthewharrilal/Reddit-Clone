@@ -51,12 +51,21 @@ var checkAuth = (req, res, next) => {
     next();
 };
 
+var isUserAuthorized = (req, res, next) => {
+    console.log('This is the user ' + JSON.stringify(req.user))
+    if (!req.user) {
+        console.log('User isnt authorized')
+        res.status(401) // Unauthorized
+        return res.send('USER HAS NOT BEEN AUTHENTICATED')
+    }
+    else {
+       next()
+    }
+}
 
 app.use(checkAuth);
 
 app.get('/', (req, res) => {
-    console.log('This is the current user ' + JSON.stringify(app.locals.user))
-    console.log('Cookies on the request ' + JSON.stringify(req.cookies))
     PostModel.find({}, function (err, posts) {
             console.log('These are the posts ' + err)
             res.render('./posts-index.handlebars', {
@@ -69,6 +78,7 @@ app.get('/', (req, res) => {
 });
 
 Auth(app);
+app.use(isUserAuthorized);
 Post(app);
 Subreddit(app);
 Comment(app);
