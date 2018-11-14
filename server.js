@@ -45,16 +45,18 @@ var checkAuth = (req, res, next) => {
         }) || {};
         console.log('This is the decoded JWT token user ' + decodedToken.payload)
         req.user = decodedToken.payload;
+        res.locals.user = req.user // Every request has this middleware with it therefore every request has a scope to the local properties such as the user
     }
 
     next();
 };
-app.use(checkAuth);
 
+
+app.use(checkAuth);
 
 app.get('/', (req, res) => {
     const currentUser = req.user
-    console.log('This is the current user ' + req.user)
+    console.log('This is the current user ' + JSON.stringify(app.locals.user))
     console.log('Cookies on the request ' + JSON.stringify(req.cookies))
     PostModel.find({}, function (err, posts) {
             console.log('These are the posts ' + err)
@@ -68,11 +70,27 @@ app.get('/', (req, res) => {
         })
 });
 
-
+Auth(app);
 Post(app);
 Subreddit(app);
 Comment(app);
-Auth(app);
+
+// var requireAuthorization = (req, res, next) => {
+//     console.log("Requiring Authorization")
+
+//     if (req.user) {
+//         Post(app);
+//         Subreddit(app);
+//         Comment(app);
+//     }
+
+//     else {
+//         'User does not exist'
+//     }
+// }
+// app.use(requireAuthorization)
+
+
 
 // Main.handlebars all other templates inherit from
 app.engine('handlebars', exphbs({

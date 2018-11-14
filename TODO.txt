@@ -9,3 +9,5 @@ Now, that we have the forgot password functionality implemented we have to figur
 remember me functionality
 
 To do that we have to make sure that 
+
+Make a more modular way to pass down the current user to all main templates
