@@ -3,15 +3,14 @@ const jwt = require('jsonwebtoken');
 const alert = require('alert-node')
 const bcrypt = require('bcryptjs')
 
-function getHash(username, password) {
-    User.findOne({
-        username: username
-    })
-    bcrypt.genSalt(10, (err, salt) => { // Ten rounds of salting
-        bcrypt.hash(password, salt, (err, hash) => { // Hash user password with salt
-            return hash
-        })
-    })
+function getHash(password, ) {
+    return new Promise(function (resolve, reject) {
+        bcrypt.genSalt(10, (err, salt) => { // Ten rounds of salting
+            bcrypt.hash(password, salt, (err, hash) => { // Hash user password with salt
+                resolve(hash)
+            });
+        });
+    });
 }
 
 
@@ -103,22 +102,9 @@ module.exports = (app) => {
     });
 
     app.put("/forgetPassword", (req, res) => {
-        const hash = getHash(req.body.email, req.body.updatedPassword) {
-            return new Promise(function () {
-
+        getHash(req.body.updatedPassword)
+            .then((hash) => {
+                
             })
-        }
-
-        User.findOneAndUpdate({
-            username: req.body.email
-        }, {
-            $set: {
-                password: hash
-            }
-        }, (err, user) => {
-            console.log("Updated Password " + user.password)
-            res.redirect('/')
-        })
-
     });
 }
