@@ -8,6 +8,6 @@ What would it look like for a forget password process and a Remember me function
 Now, that we have the forgot password functionality implemented we have to figure out the 
 remember me functionality
 
-To do that we have to make sure that 
+Make sure that the user can still see the posts without being authenticated, 
+should they see a detailed view of the post if the user is not signed in ?
 
-Make a more modular way to pass down the current user to all main templates

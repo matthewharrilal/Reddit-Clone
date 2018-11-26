@@ -6,23 +6,29 @@ const JSON = require('circular-json')
 module.exports = function(app) {
     app.post("/posts/:postId/comments", (req, res) => {
         const comment = new Comment(req.body);
+        comment.author = req.params.postId
         comment
         .save()
         .then((comment) => {
-            console.log('This is the id sent in the params ' + req.params.postId)
             return Post.findById(ObjectId(req.params.postId))
         })
         .then((post) => {
-            console.log('This is the found post ' + post)
             // Keeping the parents ordered collection through the relationship in reverse order
             post.comments.unshift(comment) // Prepends to array of comments reverse chronological order
             return post.save() // Save the post with the newly added comments
          })
          .then((post) => {
-             res.redirect('/')
+             res.redirect(`/posts/${ObjectId(req.params.postId)}/comments/${ObjectId(comment._id)}`)
          })
         .catch((err) => {
             console.log(err)
         })
     });
+
+    // app.get('/posts/:postId/comments/:commentId', (req, res) => {
+    //     Comment.findById(ObjectId(req.params.commentId) => )
+    //     .then((comment) => {
+
+    //     })
+    // });
 }

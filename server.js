@@ -54,12 +54,9 @@ var checkAuth = (req, res, next) => {
 var isUserAuthorized = (req, res, next) => {
     console.log('This is the user ' + JSON.stringify(req.user))
     if (!req.user) {
-        console.log('User isnt authorized')
-        res.status(401) // Unauthorized
-        return res.send('USER HAS NOT BEEN AUTHENTICATED')
-    }
-    else {
-       next()
+        return res.redirect('signup')
+    } else {
+        next()
     }
 }
 
