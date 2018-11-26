@@ -26,8 +26,14 @@ module.exports = function(app) {
     });
 
     app.get('/posts/:postId/comments/:commentId', (req, res) => {
-        Comment.findById(req.params.commentId, function(comment, err) {
-            res.render('./comment-show', {comment})
+        Comment.findById(ObjectId(req.params.commentId), function(err, comment) {
+            if (!err) {
+                console.log('This is the comment ' + comment)
+                return res.render('./comment-show', {comment})
+            }
+            else {
+                res.send(JSON.stringify(err))
+            }
         })
     });
 }
