@@ -54,7 +54,7 @@ var checkAuth = (req, res, next) => {
 var isUserAuthorized = (req, res, next) => {
     console.log('This is the user ' + JSON.stringify(req.user))
     if (!req.user) {
-        return res.redirect('signup')
+        return res.redirect('/signup?e=' + encodeURIComponent('Must be logged in to do that'))
     } else {
         next()
     }

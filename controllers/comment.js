@@ -25,10 +25,9 @@ module.exports = function(app) {
         })
     });
 
-    // app.get('/posts/:postId/comments/:commentId', (req, res) => {
-    //     Comment.findById(ObjectId(req.params.commentId) => )
-    //     .then((comment) => {
-
-    //     })
-    // });
+    app.get('/posts/:postId/comments/:commentId', (req, res) => {
+        Comment.findById(req.params.commentId, function(comment, err) {
+            res.render('./comment-show', {comment})
+        })
+    });
 }
