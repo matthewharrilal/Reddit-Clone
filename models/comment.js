@@ -11,12 +11,9 @@ const CommentSchema = new Schema({
         ref: "Post",
         required: true
     },
-    replies: [{
-        content: {
-            type: String,
-            required: true
-        },
-    }],
+    replies: [
+        this
+    ],
 
 })
 

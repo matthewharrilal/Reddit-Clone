@@ -25,19 +25,32 @@ module.exports = app => {
     });
 
     // CREATE REPLY
-    app.post("/posts/:postId/comments/:commentId/replies", (req, res) => {
+    app.post("/posts/:postId/comments/:commentId/replies", (req, res, next) => {
+        let newComment = new Comment(req.body);
         console.log('REQUEST BODY ' + JSON.stringify(req.body))
-        Comment.findById(req.params.commentId)
-        .then(comment => {
-            console.log('This is a new comment ' + comment)
-            comment.replies.unshift(req.body);
-            return comment.save();
-        })
-        .then(comment => {
-            res.redirect(`/posts/${ObjectId(req.params.postId)}`);
-        })
-        .catch(err => {
-            console.log(err.message);
+
+        //     Comment.findById(req.params.commentId)
+        //     .then(comment => {
+        //         console.log('This is a new comment ' + comment)
+        //         comment.replies.unshift(req.body);
+        //         return comment.save();
+        //     }) 
+        //     .then(comment => {
+        //         res.redirect(`/posts/${ObjectId(req.params.postId)}`);
+        //     })
+        //     .catch(err => {
+        //         console.log(err.message);
+        // });
+
+
+        Comment.findById(req.params.commentId).then(comment => {
+            comment.replies.push(newComment);
+            comment.save();
+            res.redirect(`/posts/${req.params.postId}`);
+        }).catch(error => {
+            Promise.reject(new Error(error));
+        });
+
+
     });
-    });
-};
+}
