@@ -33,7 +33,13 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
-    }
+    },
+
+    voteScore: {
+        type: Number,
+        default: 0
+    },
+
 });
 
 PostSchema.pre('save', function (next) {

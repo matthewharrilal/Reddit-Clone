@@ -15,6 +15,8 @@ mongoose.set('debug', true);
 const express = require('express');
 const app = express();
 app.use(methodOverride('_method'))
+app.use(express.static('public'));
+
 const PostModel = require('./models/post')
 const Post = require('./controllers/post');
 const bodyParser = require('body-parser');

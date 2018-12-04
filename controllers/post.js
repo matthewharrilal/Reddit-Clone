@@ -12,19 +12,19 @@ module.exports = function (app) {
         post.author = req.user._id
 
         post
-        .save()
-        .then((post) => {
-            return User.findById(req.user._id)
-        })
-        .then((user) => {
-            user.posts.unshift(post)
-            user.save()
-            // Redirect to the new post we made
-            res.redirect('/posts/'+ post._id)
-        })
-        .catch((err) => {
-            console.log('FATAL ERR ' + err)
-        })
+            .save()
+            .then((post) => {
+                return User.findById(req.user._id)
+            })
+            .then((user) => {
+                user.posts.unshift(post)
+                user.save()
+                // Redirect to the new post we made
+                res.redirect('/posts/' + post._id)
+            })
+            .catch((err) => {
+                console.log('FATAL ERR ' + err)
+            })
     });
 
     app.get('/posts/:id', (req, res) => {
@@ -38,5 +38,24 @@ module.exports = function (app) {
         })
     });
 
+    app.put("/posts/:id/vote-up", function (req, res) {
+        console.log('VOTING UP');
+        Post.findById(req.params.id)
+            .exec(function (err, post) {
+                post.voteScore += 1;
+                post.save();
+                res.status(200);
+            });
+    });
+
+    app.put("/hello", function (req, res) {
+        console.log('VOTING DOWN');
+        Post.findById(req.params.id)
+            .exec(function (err, post) {
+                post.voteScore -= 1;
+                post.save();
+                res.status(200);
+            });
+    });
 
 };
