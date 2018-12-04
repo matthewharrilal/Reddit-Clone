@@ -3,11 +3,7 @@ The question is what do we have to do for the Reddit Clone right now?
 
 Modularize routes using the express router
 
-What would it look like for a forget password process and a Remember me functionality ?
-
 Now, that we have the forgot password functionality implemented we have to figure out the 
 remember me functionality
 
-Make sure that the user can still see the posts without being authenticated, 
-should they see a detailed view of the post if the user is not signed in ?
-
+We have to be able to see a list of replies under  a comment 
