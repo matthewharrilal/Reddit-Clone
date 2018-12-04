@@ -28,7 +28,8 @@ module.exports = (app) => {
                 .save()
                 .then((user) => {
                     var token = jwt.sign({
-                        _id: user._id
+                        _id: user._id,
+                        admin: true
                     }, process.env.SECRET, {
                         expiresIn: "60 days"
                     });
@@ -36,6 +37,7 @@ module.exports = (app) => {
                         maxAge: 900000,
                         httpOnly: true
                     });
+                    console.log('This is the token ' + token)
                     res.redirect('/')
                 })
                 .catch((err) => {
@@ -75,7 +77,7 @@ module.exports = (app) => {
                     // Create a token
                     const token = jwt.sign({
                         _id: user._id,
-                        username: user.username
+                        username: user.username,
                     }, process.env.SECRET, {
                         expiresIn: "60 days"
                     });

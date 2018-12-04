@@ -18,7 +18,7 @@ module.exports = function(app) {
             return post.save() // Save the post with the newly added comments
          })
          .then((post) => {
-             res.redirect(`/posts/${ObjectId(req.params.postId)}/comments/${ObjectId(comment._id)}`)
+             res.redirect(`/posts/${ObjectId(req.params.postId)}`)
          })
         .catch((err) => {
             console.log(err)
