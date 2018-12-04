@@ -48,8 +48,9 @@ module.exports = function (app) {
             });
     });
 
-    app.put("/hello", function (req, res) {
+    app.put("/posts/:id/vote-down", function (req, res) {
         console.log('VOTING DOWN');
+        console.log("ID >>> " + req.params.id)
         Post.findById(req.params.id)
             .exec(function (err, post) {
                 post.voteScore -= 1;
