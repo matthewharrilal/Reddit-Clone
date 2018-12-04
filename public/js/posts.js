@@ -2,7 +2,7 @@ $(document).ready(function() {
     $(".vote-up").submit(function(e) {
         e.preventDefault();
         var postId = $(this).data("id");
-        console.log("THIS >>>> " + this)
+        console.log("DATA >>>> " + JSON.stringify(postId))
         $.ajax({
             type: "PUT",
             url: "posts/" + postId + "/vote-up",
@@ -17,10 +17,11 @@ $(document).ready(function() {
 
     $(".vote-down").submit(function(e) {
         e.preventDefault();
-        var postId = $(this).data("_id");
+        var postId = $(this).data("id");
+        console.log("DATA >>>> " + JSON.stringify(postId))
         $.ajax({
             type: "PUT",
-            url: "posts/" + "5c069a6a47a3d962cc21c95e" + "/vote-down",
+            url: "/posts/" + postId + "/vote-down",
             success: function(data) {
                 console.log("voted down!");
             },
