@@ -22,6 +22,7 @@ const JSON = require('circular-json')
 const expressValidator = require('express-validator');
 const Subreddit = require('./controllers/subreddit')
 const Comment = require('./controllers/comment')
+const Replies = require('./controllers/replies');
 const Auth = require('./controllers/auth')
 
 var exphbs = require('express-handlebars');
@@ -79,6 +80,7 @@ app.use(isUserAuthorized);
 Post(app);
 Subreddit(app);
 Comment(app);
+Replies(app);
 
 // var requireAuthorization = (req, res, next) => {
 //     console.log("Requiring Authorization")
