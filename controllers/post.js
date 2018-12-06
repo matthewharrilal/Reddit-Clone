@@ -30,6 +30,7 @@ module.exports = function (app) {
     app.get('/posts/:id', (req, res) => {
         // res.send('Working')
         Post.findById(req.params.id).populate('comments').then((post) => {
+            console.log("POSTS " + post)
             res.render('../views/post-show', {
                 post
             })
