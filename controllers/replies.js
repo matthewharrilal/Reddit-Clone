@@ -45,6 +45,7 @@ module.exports = app => {
 
         Comment.findById(req.params.commentId).then(comment => {
             comment.replies.push(newComment);
+            newComment.save()
             comment.save();
             res.redirect(`/posts/${req.params.postId}`);
         }).catch(error => {
