@@ -1,7 +1,8 @@
 <div class="col-xs-12 comment-indent">
-  <p>{{this.content}}</p>
-  {{#each this.comments}}
-  {{log comment}}
-  {{> comment}}
+  <p>{{this}}</p>
+  {{#each this.replies}} 
+  {{> comment this}}
   {{/each }}
 </div>
+
+{{!-- <h1>Hello World</h1> --}}
