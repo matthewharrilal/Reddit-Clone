@@ -11,9 +11,10 @@ const CommentSchema = new Schema({
         ref: "Post",
         required: true
     },
-    replies: [
-        this
-    ],
+    replies: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }],
 
 })
 
