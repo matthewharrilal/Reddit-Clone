@@ -27,7 +27,7 @@ module.exports = app => {
     // CREATE REPLY
     app.post("/posts/:postId/comments/:commentId/replies", (req, res, next) => {
         let newComment = new Comment(req.body);
-        console.log('REQUEST BODY ' + JSON.stringify(req.body))
+        console.log('REQUEST BODY ' + JSON.stringify(newComment))
 
         //     Comment.findById(req.params.commentId)
         //     .then(comment => {

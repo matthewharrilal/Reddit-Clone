@@ -29,7 +29,7 @@ module.exports = function (app) {
 
     app.get('/posts/:id', (req, res) => {
         // res.send('Working')
-        Post.findById(req.params.id).populate('comments').then((post) => {
+        Post.findById(req.params.id).populate('comments').then((post) => { // Populate calls find on comments we have a pre action on comments for find to populate replies falls down the chain 
             console.log("POSTS " + post)
             res.render('../views/post-show', {
                 post

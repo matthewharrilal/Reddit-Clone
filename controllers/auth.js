@@ -78,6 +78,7 @@ module.exports = (app) => {
                     const token = jwt.sign({
                         _id: user._id,
                         username: user.username,
+                        isAdmin: true
                     }, process.env.SECRET, {
                         expiresIn: "60 days"
                     });

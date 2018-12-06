@@ -6,4 +6,6 @@ Modularize routes using the express router
 Now, that we have the forgot password functionality implemented we have to figure out the 
 remember me functionality
 
-We have to be able to see a list of replies under  a comment 
+Have to fix indenting on replies
+
+Fix tests for authentication and authorization
