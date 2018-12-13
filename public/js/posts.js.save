@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log("ENtering>>>>>>")
     $(".vote-up").submit(function(e) {
         e.preventDefault();
         var postId = $(this).data("id");
